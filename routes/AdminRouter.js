@@ -29,11 +29,19 @@ AdminRouter.post("/products/add", upload.single("photo"), async (req, res) => {
     .catch((err) => {
       res.status(500).send("Internal Server Error");
     });
-  // // Fetch all products from the 'products' collection
-  // const products = await db.collection("products").find({}).toArray();
+});
 
-  // // Send the products as a JSON response
-  // res.json(products);
+AdminRouter.post("/category/add", upload.single("photo"), async (req, res) => {
+  const { name } = req.body;
+  const photo = req.file;
+  db.collection("categories")
+    .insertOne({ name, photo })
+    .then((result) => {
+      res.status(201).send("Created");
+    })
+    .catch((err) => {
+      res.status(500).send("Internal Server Error");
+    });
 });
 
 export default AdminRouter;
