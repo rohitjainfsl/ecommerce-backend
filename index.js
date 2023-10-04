@@ -3,10 +3,13 @@ import cors from "cors";
 import connection, { dbName } from "./db/connection.js";
 import AdminRouter from "./routes/AdminRouter.js";
 import BaseRouter from "./routes/BaseRouter.js";
+import path from "path";
 
 const port = 8080;
 export let db;
 const app = express();
+
+app.use('/uploads', express.static('uploads'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
